@@ -16,10 +16,19 @@ namespace Navegador
         public Form1()
         {
             InitializeComponent();
+            this.Resize += new System.EventHandler(this.Form_Resize);
+        }
+
+        private void Form_Resize(object sender, EventArgs e)
+        {
+            webView21.Size = this.ClientSize - new System.Drawing.Size(webView21.Location);
+            button1.Left = this.ClientSize.Width - button1.Width;
+            comboBox1.Width = button1.Left - comboBox1.Left;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
 
         }
 
@@ -38,7 +47,7 @@ namespace Navegador
                 Url = "https://www.google.com/search?q=" + Url;
             }
 
-            webBrowser1.Navigate(new Uri(Url));
+            webView21.Source = new Uri(Url);
         }
 
         
@@ -50,17 +59,17 @@ namespace Navegador
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoHome();
+            webView21.Source = new Uri("https://www.google.com");
         }
 
         private void anteriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoBack();
+            webView21.GoBack();
         }
 
         private void siguienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoForward();
+            webView21.GoForward();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
